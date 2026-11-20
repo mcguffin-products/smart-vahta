@@ -17,10 +17,10 @@ body{font-family:"Montserrat",Arial,sans-serif;color:var(--ink);-webkit-font-smo
 .pg{height:100dvh;position:relative;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;background:var(--bg)}
 .pg.dk{background:var(--deep)}
 .pg.dk::before{content:"";position:absolute;inset:0;background:radial-gradient(70vmax 55vmax at 100% 0%,rgba(239,121,30,.16),transparent 60%),radial-gradient(70vmax 70vmax at 0% 100%,rgba(0,110,170,.30),transparent 60%)}
-.s{position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%) scale(var(--k));padding:120px 96px 200px;display:flex;flex-direction:column;justify-content:center}
+.s{position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%) scale(var(--ks,var(--k)));padding:110px 96px 170px;display:flex;flex-direction:column;justify-content:center}
 .dk .s{color:#F3F5F6}
 .s>*{position:relative;z-index:1}
-.s>.road,.s>.foot{position:absolute}
+.s>.road{position:absolute}
 .road{z-index:0;pointer-events:none}
 
 /* type */
@@ -38,7 +38,7 @@ h3{font-size:42px;font-weight:700;line-height:1.2}
 .lbl{font-size:28px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orgt)}
 .dk .lbl{color:var(--yel)}
 .risk{font-size:30px;line-height:1.35;font-weight:600;color:#9A4A0B}
-.foot{left:96px;right:96px;bottom:150px;font-size:28px;line-height:1.4;color:#6A7D8B}
+.foot{margin-top:56px;font-size:28px;line-height:1.4;color:#6A7D8B}
 .dk .foot{color:#A9C2D1}
 .hl{background:linear-gradient(transparent 86%,#EF791E 86% 96%,transparent 96%) no-repeat 0 0/100% 100%}
 .num{font-size:84px;font-weight:800;line-height:1;color:var(--navy);white-space:nowrap;letter-spacing:-1px}
@@ -91,7 +91,7 @@ h3{font-size:42px;font-weight:700;line-height:1.2}
 
 /* ===== landscape ===== */
 .wide .s{padding:110px 128px 130px;display:grid;column-gap:96px;align-content:center}
-.wide .foot{left:128px;right:128px;bottom:64px}
+.wide .foot{grid-column:1/-1;margin-top:8px}
 .wide h1{font-size:160px}
 .wide .hd{align-self:center}
 /* 1 cover */
@@ -146,9 +146,9 @@ h3{font-size:42px;font-weight:700;line-height:1.2}
 .wide #p9 .met>div:nth-child(odd){border-bottom:0;padding-bottom:0}
 .wide #p9 .met>div:nth-child(even){padding-top:4px}
 
-.wide .s{padding:84px 128px 120px}
+.wide .s{padding:80px 128px 110px}
 .wide h2{font-size:72px}
-.wide .foot{bottom:52px}
+
 .wide #p3 .st .card{padding:30px 32px}
 .wide #p3 .num{font-size:76px}
 .wide #p4 .stage .shot{width:176px;height:359px}
@@ -229,7 +229,7 @@ h3{font-size:42px;font-weight:700;line-height:1.2}
 <p class="lead" style="font-size:42px;max-width:860px">Мобильное приложение для вахтовиков и кабинет для офиса вахты</p>
 </div>
 <img class="shot tilt ph" src="before.webp" alt="Главный экран приложения: до заезда 3 дня, готовность к вахте" style="width:420px;height:857px;margin:64px auto 0">
-<p class="foot">STASY CREATIVE · ноябрь 2026</p>
+<p class="foot">McGuffin · ноябрь 2026</p>
 </section></div>
 
 <!-- 2 -->
@@ -413,7 +413,7 @@ h3{font-size:42px;font-weight:700;line-height:1.2}
 <p class="pt">Выберем объекты и метрики пилота</p>
 </div>
 </div>
-<p class="foot">STASY CREATIVE · ноябрь 2026</p>
+<p class="foot">McGuffin · ноябрь 2026</p>
 </section></div>
 
 </div>
@@ -427,8 +427,9 @@ var R=document.documentElement,deck=document.getElementById('deck'),pgs=[].slice
 function fit(){var vw=innerWidth,vh=innerHeight,wide=vw/vh>=1.05,W,H,k;
  if(wide){W=1920;H=1080;if(vw/vh>W/H)k=vh/H;else{k=vw/W;H=Math.ceil(vh/k)}}
  else{W=1080;H=1920;if(vw/vh<W/H){k=vw/W;H=Math.ceil(vh/k)}else k=vh/H}
- R.classList.toggle('wide',wide);R.style.setProperty('--k',k);R.style.setProperty('--w',W+'px');R.style.setProperty('--h',H+'px')}
-fit();addEventListener('resize',fit);
+ R.classList.toggle('wide',wide);R.style.setProperty('--k',k);R.style.setProperty('--w',W+'px');R.style.setProperty('--h',H+'px');
+ [].forEach.call(document.querySelectorAll('.s'),function(s){s.style.height='auto';var need=Math.ceil(s.offsetHeight),h=Math.max(H,need);s.style.height=h+'px';s.style.setProperty('--ks',k*H/h)})}
+fit();addEventListener('resize',fit);addEventListener('load',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 function countUp(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'',t0=null,dur=1200;
  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=pre+(to*e).toFixed(dec).replace('.',',')+suf;if(p<1)requestAnimationFrame(f)}
