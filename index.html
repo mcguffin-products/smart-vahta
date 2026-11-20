@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#003A5A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 28 28%27%3E%3Crect width=%2728%27 height=%2728%27 rx=%278%27 fill=%27%23004164%27/%3E%3Cpath d=%27M6 23L12.2 5M22 23L15.8 5%27 stroke=%27%23fff%27 stroke-width=%272.6%27 stroke-linecap=%27round%27/%3E%3Cpath d=%27M14 22v-3M14 15v-2.5M14 9.5V8%27 stroke=%27%23EF791E%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<title>СМАРТ.Вахта — презентация для Автобана</title>
+<style>
+@font-face{font-family:"Montserrat";src:url(mont.woff) format("woff");font-weight:400 800;font-style:normal;font-display:swap}
+:root{--navy:#004164;--deep:#003A5A;--ink:#0E2A3B;--org:#EF791E;--orgt:#B4560F;--yel:#FBB911;--bg:#F3F5F6;--card:#FBFCFC;--mut:#45596A;--line:#DCE4E8;--k:.5;--w:1080px;--h:1920px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--deep)}
+body{font-family:"Montserrat",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain}
+.pg{height:100dvh;position:relative;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;background:var(--bg)}
+.pg.dk{background:var(--deep)}
+.pg.dk::before{content:"";position:absolute;inset:0;background:radial-gradient(70vmax 55vmax at 100% 0%,rgba(239,121,30,.16),transparent 60%),radial-gradient(70vmax 70vmax at 0% 100%,rgba(0,110,170,.30),transparent 60%)}
+.s{position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%) scale(var(--k));padding:120px 96px 200px;display:flex;flex-direction:column;justify-content:center}
+.dk .s{color:#F3F5F6}
+.s>*{position:relative;z-index:1}
+.s>.road,.s>.foot{position:absolute}
+.road{z-index:0;pointer-events:none}
+
+/* type */
+.eb{font-size:28px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:16px}
+.eb::before{content:"";width:22px;height:30px;flex:none;background:linear-gradient(0deg,#EF791E,#FBB911);clip-path:polygon(32% 0,68% 0,100% 100%,0 100%)}
+.dk .eb{color:var(--yel)}
+h1{font-size:150px;font-weight:800;line-height:.98;letter-spacing:-3px;margin-top:28px}
+h2{font-size:80px;font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-top:18px}
+h3{font-size:42px;font-weight:700;line-height:1.2}
+.lead{font-size:40px;line-height:1.45;color:var(--mut);margin-top:28px}
+.dk .lead{color:#C5D7E2}
+.t{font-size:34px;line-height:1.42;color:var(--mut)}
+.dk .t{color:#C5D7E2}
+.ink{color:var(--ink)!important}
+.lbl{font-size:28px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orgt)}
+.dk .lbl{color:var(--yel)}
+.risk{font-size:30px;line-height:1.35;font-weight:600;color:#9A4A0B}
+.foot{left:96px;right:96px;bottom:150px;font-size:28px;line-height:1.4;color:#6A7D8B}
+.dk .foot{color:#A9C2D1}
+.hl{background:linear-gradient(transparent 86%,#EF791E 86% 96%,transparent 96%) no-repeat 0 0/100% 100%}
+.num{font-size:84px;font-weight:800;line-height:1;color:var(--navy);white-space:nowrap;letter-spacing:-1px}
+
+/* blocks */
+.card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:40px}
+.dk .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+.card.hot{background:var(--org);border-color:var(--org);color:#10222E}
+.card.hot .t{color:#10222E}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.col{display:flex;flex-direction:column}
+.shot{display:block;object-fit:contain;filter:drop-shadow(0 22px 26px rgba(0,30,50,.28))}
+.dk .shot{filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.wide-img{display:block;width:100%;height:auto;border-radius:16px;border:2px solid var(--line)}
+.pt{font-size:36px;line-height:1.42;padding-left:28px;border-left:8px solid var(--org)}
+.stages{display:flex;flex-direction:column}
+.stage{display:flex;gap:36px;align-items:center;padding:24px 0;border-top:2px solid var(--line)}
+.stage:first-child{border-top:0}
+.stage .shot{width:170px;height:347px;flex:none}
+.cmp{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--line)}
+.cmp>div{padding:18px 0;border-bottom:2px solid var(--line);font-size:32px;line-height:1.38}
+.cmp>div:nth-child(odd){padding-right:28px;color:#6A7D8B}
+.cmp .h{font-size:26px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy)}
+.cmp .h.o{color:var(--orgt)}
+.tb{display:grid;grid-template-columns:340px 1fr;border-top:2px solid rgba(255,255,255,.18)}
+.tb>div{padding:22px 0;border-bottom:2px solid rgba(255,255,255,.18);font-size:32px;line-height:1.35}
+.tb>div:nth-child(odd){font-weight:700;padding-right:24px}
+.met{display:grid;grid-template-columns:300px 1fr;border-top:2px solid var(--line)}
+.met>div{padding:16px 0;border-bottom:2px solid var(--line);font-size:31px;line-height:1.35}
+.met>div:nth-child(odd){font-weight:700;padding-right:24px}
+.met>div:nth-child(even){color:var(--mut)}
+.four{display:grid;grid-template-columns:1fr 1fr;gap:36px 28px}
+.four>div{display:flex;flex-direction:column;align-items:center;gap:18px}
+.four .shot{width:250px;height:510px}
+.four .t{font-size:31px;align-self:stretch}
+
+/* arrow with perspective */
+.arr{display:inline-block;width:.9em;height:.9em;vertical-align:-.08em;margin-left:.35em}
+
+/* demo */
+.demo{display:flex;gap:36px;align-items:flex-start;margin-top:44px}
+.phone{--ps:1.4103;width:calc(390px*var(--ps) + 28px);height:calc(856.6px*var(--ps) + 28px);flex:none;border-radius:64px;background:#0E1E28;padding:14px;box-shadow:0 30px 60px -24px rgba(0,40,64,.5)}
+.phone .vp{width:100%;height:100%;border-radius:52px;overflow:hidden;position:relative;background:#fff}
+.phone iframe{position:absolute;left:0;top:0;width:390px;height:856.6px;border:0;transform:scale(var(--ps));transform-origin:0 0}
+.ctl{display:flex;flex-direction:column;gap:18px;flex:1;min-width:0}
+.btn{font:inherit;font-size:32px;font-weight:700;border-radius:18px;padding:24px 22px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:left;transition:border-color .2s,background .2s}
+.btn[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.main{background:var(--org);border-color:var(--org);color:#10222E}
+@media (hover:hover){.btn:hover{border-color:var(--org)}}
+
+/* ===== landscape ===== */
+.wide .s{padding:110px 128px 130px;display:grid;column-gap:96px;align-content:center}
+.wide .foot{left:128px;right:128px;bottom:64px}
+.wide h1{font-size:160px}
+.wide .hd{align-self:center}
+/* 1 cover */
+.wide #p1 .s{grid-template-columns:1fr 600px}
+.wide #p1 .ph{grid-column:2;grid-row:1;justify-self:center;margin:0!important}
+.wide #p1 .hd{grid-row:1}
+/* 2 summary */
+.wide #p2 .s{grid-template-columns:600px 1fr}
+.wide #p2 .cards{margin-top:0!important}
+/* 3 market */
+.wide #p3 .s{grid-template-columns:720px 1fr;grid-template-rows:auto auto;row-gap:48px}
+.wide #p3 .hd{grid-column:1;grid-row:1;align-self:end}
+.wide #p3 .st{grid-column:2;grid-row:1/3;margin:0!important;align-self:center}
+.wide #p3 .cmpw{grid-column:1;grid-row:2;margin:0!important;align-self:start}
+/* 4 stages */
+.wide #p4 .s{grid-template-columns:1fr;row-gap:48px}
+.wide #p4 .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;margin:0!important}
+.wide #p4 .stage{flex-direction:column;align-items:flex-start;gap:24px;padding:0;border:0}
+.wide #p4 .stage .shot{width:200px;height:408px}
+/* 5 demo */
+.wide #p5 .s{grid-template-columns:600px 1fr}
+.wide #p5 .demo{margin:0!important;align-items:center}
+.wide #p5 .phone{--ps:.98}
+.wide #p5 .ctl{max-width:420px}
+/* 6 extras */
+.wide #p6 .s{grid-template-columns:1fr;row-gap:48px}
+.wide #p6 .four{grid-template-columns:repeat(4,1fr);margin:0!important}
+/* 7 office */
+.wide #p7 .s{grid-template-columns:1fr 1fr;row-gap:44px}
+.wide #p7 .hd{grid-column:1/3}
+.wide #p7 .blk{margin:0!important}
+/* 8 ecosystem */
+.wide #p8 .s{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;row-gap:48px}
+.wide #p8 .hd{grid-column:1;grid-row:1}
+.wide #p8 .mods{grid-column:1;grid-row:2;margin:0!important}
+.wide #p8 .data{grid-column:2;grid-row:1/3;margin:0!important;align-self:center}
+/* 9 pilot */
+.wide #p9 .s{grid-template-columns:repeat(3,1fr);row-gap:48px;column-gap:64px}
+.wide #p9 .hd{grid-column:1/4}
+.wide #p9 .grp{margin:0!important}
+.wide #p9 .met>div{font-size:28px}
+/* 10 next */
+.wide #p10 .s{grid-template-columns:1100px 1fr}
+
+
+.wide #p1 .ph{width:372px!important;height:760px!important}
+.wide #p2 .card{padding:30px 36px}
+.wide #p2 .card .t{font-size:32px!important}
+.wide #p3 .cmp>div{font-size:28px;padding:14px 0}
+.wide #p3 .cmpw h3{font-size:36px}
+.wide #p9 .met{grid-template-columns:1fr}
+.wide #p9 .met>div:nth-child(odd){border-bottom:0;padding-bottom:0}
+.wide #p9 .met>div:nth-child(even){padding-top:4px}
+
+.wide .s{padding:84px 128px 120px}
+.wide h2{font-size:72px}
+.wide .foot{bottom:52px}
+.wide #p3 .st .card{padding:30px 32px}
+.wide #p3 .num{font-size:76px}
+.wide #p4 .stage .shot{width:176px;height:359px}
+.wide #p4 .stage .t{font-size:30px}
+.wide #p9 .met>div{font-size:27px;padding-top:10px}
+.wide #p9 .met>div:nth-child(even){padding-bottom:10px}
+/* road (signature gradient triangle) */
+.road{left:0;bottom:0}
+.wide .road{left:auto;right:0}
+.wide #p1 .road path:first-child{d:path("M60 900L600 120h44L1080 900z")}
+
+/* chrome */
+.ui{position:fixed;z-index:20;font-family:"Montserrat",Arial,sans-serif;font-size:13px;font-weight:700;border-radius:999px;background:rgba(14,30,40,.78);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#cnt{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:7px 12px;pointer-events:none}
+#go{left:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:7px 14px;border:0;cursor:pointer;background:#EF791E;color:#10222E;font:inherit;font-size:13px;font-weight:700;display:flex;align-items:center}
+#prog{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,#EF791E,#FBB911);z-index:30;transition:width .3s}
+#dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:10px;z-index:25}
+#dots button{width:8px;height:8px;border-radius:8px;border:0;padding:0;background:rgba(127,150,165,.5);cursor:pointer;transition:height .3s,background .3s}
+#dots button[aria-current="true"]{height:26px;background:#EF791E}
+@media (min-width:900px){#dots{display:flex}}
+#ov{position:fixed;inset:0;z-index:50;background:#0E1E28;display:none;flex-direction:column}
+#ov.on{display:flex}
+#ov .obar{height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 10px 0 16px;display:flex;align-items:center;gap:10px;color:#fff;font-family:"Montserrat",Arial,sans-serif;font-size:14px;flex:none}
+#ov .obar b{font-weight:700;white-space:nowrap}
+.oseg{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:3px;margin-left:auto}
+.oseg button,#ovx{font:inherit;font-size:13px;font-weight:700;border:0;border-radius:999px;padding:7px 12px;cursor:pointer;background:transparent;color:#fff}
+.oseg button[aria-pressed="true"]{background:#fff;color:#0E1E28}
+#ovx{background:rgba(255,255,255,.14);margin-left:auto}
+.oseg+#ovx{margin-left:0}
+@media (max-width:420px){#ov .obar b{display:none}}
+@media (min-width:521px){.oseg{display:none}}
+#ov .fr{flex:1;min-height:0;background:#fff}
+#ov iframe{width:100%;height:100%;border:0;display:block}
+
+/* motion: calm, once per arrival */
+@keyframes rise{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes mark{from{background-size:0% 100%}to{background-size:100% 100%}}
+@keyframes drive{to{stroke-dashoffset:-130}}
+@keyframes roadIn{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes phoneIn{from{opacity:0;transform:perspective(1400px) rotateX(14deg) translateY(90px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(239,121,30,.55)}100%{box-shadow:0 0 0 24px rgba(239,121,30,0)}}
+.dash{stroke-dasharray:70 60;animation:drive 3s linear infinite}
+.in .hd>*{animation:rise .75s cubic-bezier(.2,.7,.2,1) both}
+.in .hd>*:nth-child(2){animation-delay:.06s}.in .hd>*:nth-child(3){animation-delay:.12s}.in .hd>*:nth-child(4){animation-delay:.18s}
+.in .a{animation:rise .75s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.3s + var(--d,0s))}
+.in .hl{animation:mark .9s cubic-bezier(.6,0,.2,1) .6s both}
+.in .road{animation:roadIn 1.1s cubic-bezier(.2,.7,.2,1) both}
+.in .tilt{animation:phoneIn 1.1s cubic-bezier(.2,.7,.2,1) .3s both}
+.in .foot{animation:fadeIn .8s ease-out .8s both}
+.in .btn.main{animation:pulse 2.2s ease-out 1.4s 1}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body,#deck{height:auto;overflow:visible;background:none}
+  .pg{height:1080px;width:1920px;break-after:page}
+  .s{transform:none;left:0;top:0;width:1920px;height:1080px}
+  .ui,#ov,#prog,#dots{display:none!important}
+  *{animation:none!important}
+  .phone .vp iframe{display:none}
+  .phone .vp{background:url(before.webp) center/cover}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="rg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#EF791E"/><stop offset=".55" stop-color="#F59A1A" stop-opacity=".85"/><stop offset="1" stop-color="#FBB911" stop-opacity=".08"/></linearGradient>
+<symbol id="arr" viewBox="0 0 20 20"><path d="M4 16L15 5M7 5h8v8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div id="deck">
+
+<!-- 1 -->
+<div class="pg dk" id="p1"><section class="s">
+<svg class="road" viewBox="0 0 1080 900" width="1080" height="900" aria-hidden="true"><path d="M470 900L600 120h44L1080 900z" fill="url(#rg)" opacity=".9"/><path class="dash" d="M622 140L600 900" stroke="#003A5A" stroke-width="12" stroke-linecap="round"/></svg>
+<div class="hd">
+<p class="eb">Концепция для Автобан-Диджитал</p>
+<h1>СМАРТ.<br>Вахта</h1>
+<p class="lead" style="font-size:42px;max-width:860px">Мобильное приложение для вахтовиков и кабинет для офиса вахты</p>
+</div>
+<img class="shot tilt ph" src="before.webp" alt="Главный экран приложения: до заезда 3 дня, готовность к вахте" style="width:420px;height:857px;margin:64px auto 0">
+<p class="foot">STASY CREATIVE · ноябрь 2026</p>
+</section></div>
+
+<!-- 2 -->
+<div class="pg" id="p2"><section class="s">
+<div class="hd">
+<p class="eb">Коротко</p>
+<h2>Приложение для вахты Автобана</h2>
+</div>
+<div class="col cards" style="gap:32px;margin-top:64px">
+<div class="card a"><p class="lbl">Что это</p><p class="t ink" style="font-size:36px;margin-top:14px">У сотрудника в телефоне вся его вахта: дата заезда, билеты, комната в городке, смены и расчётный лист. Офис видит, готова ли бригада и что не так в городках.</p></div>
+<div class="card a" style="--d:.08s"><p class="lbl">Зачем Автобану</p><p class="t ink" style="font-size:36px;margin-top:14px">Меньше неявок и возвратов билетов. Офис заранее знает, кто не приедет, и успевает найти замену. Жалобы из городков доходят до коменданта.</p></div>
+<div class="card a" style="--d:.16s"><p class="lbl">Что предлагаем</p><p class="t ink" style="font-size:36px;margin-top:14px">Аудит и пилот на одном-двух объектах. Модуль дополняет линейку СМАРТ: СМАРТ.План, СМАРТ.Тех и СМАРТ.Карго.</p></div>
+</div>
+<p class="foot">Демо приложения на странице 5</p>
+</section></div>
+
+<!-- 3 -->
+<div class="pg" id="p3"><section class="s">
+<div class="hd">
+<p class="eb">Рынок вахты, 2026</p>
+<h2>Вахту нанимают <span class="hl">круглый год</span></h2>
+<p class="t ink" style="margin-top:24px">Разрыв между самым активным и самым спокойным месяцем сократился вдвое.</p>
+</div>
+<div class="g2 st" style="margin-top:44px">
+<div class="card a"><p class="num" data-to="2.7" data-dec="1" data-suf=" млн">2,7 млн</p><p class="t" style="margin-top:16px;font-size:31px">откликов на вахтовые вакансии в январе–июле</p></div>
+<div class="card a" style="--d:.06s"><p class="num" data-to="33" data-suf="%">33%</p><p class="t" style="margin-top:16px;font-size:31px">откликов приходится на строительство</p></div>
+<div class="card a" style="--d:.12s"><p class="num" data-to="17" data-pre="+" data-suf="%">+17%</p><p class="t" style="margin-top:16px;font-size:31px">строительных компаний, нанимающих вахтой</p></div>
+<div class="card a" style="--d:.18s"><p class="num" data-to="178" data-suf=" тыс.">178 тыс.</p><p class="t" style="margin-top:16px;font-size:31px">₽ в месяц, медианная оплата на вахте. На обычной работе 82 тыс.</p></div>
+</div>
+<div class="cmpw a" style="margin-top:48px;--d:.2s">
+<h3>Отличие от wellness-приложений</h3>
+<div class="cmp" style="margin-top:20px">
+<div class="h">Wellness</div><div class="h o">СМАРТ.Вахта</div>
+<div>Медитации, советы, трекеры</div><div>Заезд, билеты, городок, смены, выплаты</div>
+<div>Открывают по желанию</div><div>Нужно каждому вахтовику и офису</div>
+<div>Эффект не доказан</div><div>Результат измеряем на пилоте</div>
+</div>
+</div>
+<p class="foot">Источники: «Авито Работа», октябрь 2026; Industrial Relations Journal, 2024</p>
+</section></div>
+
+<!-- 4 -->
+<div class="pg" id="p4"><section class="s">
+<div class="hd">
+<p class="eb">Приложение сотрудника</p>
+<h2>Четыре этапа вахты</h2>
+</div>
+<div class="stages" style="margin-top:28px">
+<div class="stage a"><img class="shot" src="before.webp" alt="Экран до заезда"><div class="col" style="gap:10px"><p class="lbl">01 · До заезда</p><p class="risk">Риск: неявка и сгоревший билет</p><p class="t">За три дня до заезда чек-лист: медосмотр, допуски, билеты, размер спецодежды. Если человек не сможет приехать, офис узнает сразу.</p></div></div>
+<div class="stage a" style="--d:.08s"><img class="shot" src="travel.webp" alt="Экран в пути"><div class="col" style="gap:10px"><p class="lbl">02 · Дорога</p><p class="risk">Риск: опоздание, о котором никто не знает</p><p class="t">Маршрут, пункт сбора и трансфер. О задержке сотрудник сообщает одной кнопкой.</p></div></div>
+<div class="stage a" style="--d:.16s"><img class="shot" src="onsite.webp" alt="Экран на объекте"><div class="col" style="gap:10px"><p class="lbl">03 · На объекте</p><p class="risk">Риск: усталость и бытовые проблемы</p><p class="t">График смен на пять дней, отметка сна (её видит только сотрудник), заявки коменданту, анонимная оценка городка.</p></div></div>
+<div class="stage a" style="--d:.24s"><img class="shot" src="between.webp" alt="Экран межвахты"><div class="col" style="gap:10px"><p class="lbl">04 · Межвахта</p><p class="risk">Риск: человек не вернётся</p><p class="t">Расчётный лист по главе 47 ТК РФ, дата следующего заезда и список документов к нему.</p></div></div>
+</div>
+</section></div>
+
+<!-- 5 -->
+<div class="pg" id="p5"><section class="s">
+<div class="hd">
+<p class="eb">Демо</p>
+<h2>Откройте приложение</h2>
+<p class="lead" style="margin-top:20px">Введите имя и фамилию, и приложение покажет вахту от вашего лица. Кнопки справа переключают этап.</p>
+</div>
+<div class="demo">
+<div class="phone a"><div class="vp"><iframe id="demo" src="demo.html" title="Демо приложения СМАРТ.Вахта"></iframe></div></div>
+<div class="ctl a" style="--d:.1s">
+<button class="btn main" data-open="employee">На весь экран<svg class="arr"><use href="#arr"/></svg></button>
+<p class="lbl" style="margin-top:24px">Этап вахты</p>
+<button class="btn" data-ph="before">До заезда</button>
+<button class="btn" data-ph="travel">В пути</button>
+<button class="btn" data-ph="onsite">На объекте</button>
+<button class="btn" data-ph="between">Межвахта</button>
+<button class="btn" data-open="hr" style="margin-top:24px">Кабинет офиса<svg class="arr"><use href="#arr"/></svg></button>
+<p class="t" style="font-size:27px;margin-top:8px">Данные условные и сохраняются только на этом устройстве</p>
+</div>
+</div>
+</section></div>
+
+<!-- 6 -->
+<div class="pg" id="p6"><section class="s">
+<div class="hd">
+<p class="eb">Приложение сотрудника</p>
+<h2>Что ещё есть в приложении</h2>
+</div>
+<div class="four" style="margin-top:44px">
+<div class="a"><img class="shot" src="cal.webp" alt="Календарь вахты"><p class="t"><b class="ink">Календарь.</b> Смены, ночи, выходные и дни в дороге</p></div>
+<div class="a" style="--d:.06s"><img class="shot" src="pay.webp" alt="Расчётный лист"><p class="t"><b class="ink">Расчётный лист.</b> Дорожные дни и надбавка за вахту по ТК РФ</p></div>
+<div class="a" style="--d:.12s"><img class="shot" src="family.webp" alt="Ссылка для семьи"><p class="t"><b class="ink">Для семьи.</b> Ссылка с датами, когда человек будет дома</p></div>
+<div class="a" style="--d:.18s"><img class="shot" src="uz.webp" alt="Интерфейс на узбекском"><p class="t"><b class="ink">Пять языков.</b> Русский, узбекский, таджикский, кыргызский, казахский</p></div>
+</div>
+</section></div>
+
+<!-- 7 -->
+<div class="pg" id="p7"><section class="s">
+<div class="hd">
+<p class="eb">Офис вахты</p>
+<h2>Кабинет офиса вахты</h2>
+</div>
+<div class="col blk a" style="gap:18px;margin-top:44px">
+<p class="lbl">Заезды</p>
+<img class="wide-img" src="arrivals.webp" alt="Таблица заездов: медосмотр, допуски, билеты, спецодежда, подтверждение по каждому сотруднику">
+<p class="t" style="font-size:32px">Видно, кто подтвердил заезд, кто отказался и почему, у кого нет билета, медосмотра или допуска.</p>
+</div>
+<div class="col blk a" style="gap:18px;margin-top:48px;--d:.1s">
+<p class="lbl">Городки</p>
+<img class="wide-img" src="camps.webp" alt="Раздел городков: оценка, заявки коменданту, сигналы усталости">
+<p class="t" style="font-size:32px">Заявки коменданту и их статусы, оценки городков, число сигналов об усталости за неделю. Имён и диагнозов офис не видит.</p>
+</div>
+</section></div>
+
+<!-- 8 -->
+<div class="pg dk" id="p8"><section class="s">
+<div class="hd">
+<p class="eb">Место в экосистеме</p>
+<h2>Новый модуль линейки СМАРТ</h2>
+</div>
+<div class="g2 mods" style="margin-top:48px">
+<div class="card a"><h3>СМАРТ.План</h3><p class="t" style="margin-top:8px">Работы и график</p></div>
+<div class="card a" style="--d:.06s"><h3>СМАРТ.Тех</h3><p class="t" style="margin-top:8px">Техника</p></div>
+<div class="card a" style="--d:.12s"><h3>СМАРТ.Карго</h3><p class="t" style="margin-top:8px">Грузы</p></div>
+<div class="card hot a" style="--d:.18s"><h3>СМАРТ.Вахта</h3><p class="t" style="margin-top:8px">Люди на вахте · новый модуль</p></div>
+</div>
+<div class="data a" style="margin-top:64px;--d:.2s">
+<h3>Откуда берём данные</h3>
+<p class="t" style="margin-top:8px;font-size:30px">Уточняем на аудите</p>
+<div class="tb" style="margin-top:24px">
+<div>График смен и вахт</div><div>Система планирования работ</div>
+<div>Расчётный лист</div><div>1С:ЗУП</div>
+<div>Билеты и трансфер</div><div>Тревел-агент или отдел, который их покупает</div>
+<div>Сотрудники и документы</div><div>HR-система или выгрузка CSV на пилоте</div>
+</div>
+</div>
+<p class="foot">СМАРТ.План, СМАРТ.Тех и СМАРТ.Карго представлены Автобаном и Автобан-Диджитал на Транспортной неделе 2022</p>
+</section></div>
+
+<!-- 9 -->
+<div class="pg" id="p9"><section class="s">
+<div class="hd">
+<p class="eb">1–2 объекта · 20 недель</p>
+<h2>Пилот</h2>
+</div>
+<div class="grp a" style="margin-top:44px">
+<p class="lbl">Сроки</p>
+<div class="met" style="margin-top:14px">
+<div>Неделя 1</div><div>Аудит процессов, систем и данных</div>
+<div>Недели 2–8</div><div>Адаптация и подключение данных</div>
+<div>Недели 9–20</div><div>Запуск на объектах и замеры</div>
+</div>
+</div>
+<div class="grp a" style="margin-top:34px;--d:.08s">
+<p class="lbl">Что измеряем</p>
+<div class="met" style="margin-top:14px">
+<div>Заезды</div><div>Доля бригады, подтвердившей заезд за 3 дня</div>
+<div>Срывы</div><div>Неявки и возвраты билетов</div>
+<div>Время ответа</div><div>От заявки в городке до выполнения</div>
+<div>Возвращаемость</div><div>Доля вернувшихся на следующую вахту</div>
+<div>Активация</div><div>Доля приглашённых, кто вошёл в приложение</div>
+</div>
+</div>
+<div class="grp a" style="margin-top:34px;--d:.16s">
+<p class="lbl">Условия</p>
+<div class="met" style="margin-top:14px">
+<div>Внедрение</div><div>Аудит, адаптация, подключение данных</div>
+<div>Лицензия</div><div>Оплата за активного сотрудника в месяц</div>
+<div>Сопровождение</div><div>Поддержка, обновления, обучение офиса</div>
+<div>Тиражирование</div><div>Продажа модуля другим подрядчикам с долей Автобана</div>
+</div>
+</div>
+<p class="foot">Стоимость рассчитаем после аудита и выбора объектов пилота</p>
+</section></div>
+
+<!-- 10 -->
+<div class="pg dk" id="p10"><section class="s">
+<svg class="road" viewBox="0 0 1080 700" width="1080" height="700" aria-hidden="true"><path d="M500 700L800 60h40L1080 700z" fill="url(#rg)" opacity=".9"/><path class="dash" d="M820 80L760 700" stroke="#003A5A" stroke-width="12" stroke-linecap="round"/></svg>
+<div class="hd">
+<p class="eb">Следующий шаг</p>
+<h2 style="font-size:96px">Встреча <span class="hl">на 40 минут</span></h2>
+<p class="lead">С руководителями, отвечающими за вахту, и командой Автобан-Диджитал</p>
+<div class="col" style="gap:28px;margin-top:56px">
+<p class="pt">Покажем демо и разберём, как сейчас проходят заезды</p>
+<p class="pt">Обсудим доступ к процессам и данным для аудита</p>
+<p class="pt">Выберем объекты и метрики пилота</p>
+</div>
+</div>
+<p class="foot">STASY CREATIVE · ноябрь 2026</p>
+</section></div>
+
+</div>
+<div id="prog" aria-hidden="true"></div><nav id="dots" aria-label="Страницы"></nav>
+<button class="ui" id="go">Демо<svg class="arr" style="width:12px;height:12px;margin-left:6px"><use href="#arr"/></svg></button>
+<div class="ui" id="cnt">1 / 10</div>
+<div id="ov" role="dialog" aria-label="Демо на весь экран"><div class="obar"><b>СМАРТ.Вахта · демо</b><div class="oseg" role="group" aria-label="Режим"><button data-m="employee" aria-pressed="true">Сотрудник</button><button data-m="hr" aria-pressed="false">Офис</button></div><button id="ovx">Закрыть</button></div><div class="fr"><iframe id="demo2" title="Демо приложения СМАРТ.Вахта"></iframe></div></div>
+<script>
+(function(){
+var R=document.documentElement,deck=document.getElementById('deck'),pgs=[].slice.call(document.querySelectorAll('.pg')),cnt=document.getElementById('cnt');
+function fit(){var vw=innerWidth,vh=innerHeight,wide=vw/vh>=1.05,W,H,k;
+ if(wide){W=1920;H=1080;if(vw/vh>W/H)k=vh/H;else{k=vw/W;H=Math.ceil(vh/k)}}
+ else{W=1080;H=1920;if(vw/vh<W/H){k=vw/W;H=Math.ceil(vh/k)}else k=vh/H}
+ R.classList.toggle('wide',wide);R.style.setProperty('--k',k);R.style.setProperty('--w',W+'px');R.style.setProperty('--h',H+'px')}
+fit();addEventListener('resize',fit);
+function countUp(el){var to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'',t0=null,dur=1200;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=pre+(to*e).toFixed(dec).replace('.',',')+suf;if(p<1)requestAnimationFrame(f)}
+ setTimeout(function(){requestAnimationFrame(f)},400)}
+var cur=0,dots=document.getElementById('dots');
+pgs.forEach(function(p,i){var b=document.createElement('button');b.setAttribute('aria-label','Страница '+(i+1));b.onclick=function(){go(i)};dots.appendChild(b)});
+function setCur(i){cur=i;cnt.textContent=(i+1)+' / '+pgs.length;[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i)})}
+var prog=document.getElementById('prog');deck.addEventListener('scroll',function(){var m=deck.scrollHeight-deck.clientHeight;prog.style.width=(m?deck.scrollTop/m*100:0)+'%'},{passive:true});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!e.target.classList.contains('in')){e.target.classList.add('in');[].forEach.call(e.target.querySelectorAll('[data-to]'),countUp)}setCur(pgs.indexOf(e.target))}})},{root:deck,threshold:.55});pgs.forEach(function(p){io.observe(p)})}else pgs.forEach(function(p){p.classList.add('in')});
+function go(i){i=Math.max(0,Math.min(pgs.length-1,i));pgs[i].scrollIntoView({behavior:'smooth'})}
+var ov=document.getElementById('ov'),ovx=document.getElementById('ovx'),d1=document.getElementById('demo'),d2=document.getElementById('demo2');
+addEventListener('keydown',function(e){if(ov.classList.contains('on')){if(e.key==='Escape')close();return}
+ if(['ArrowDown','PageDown',' ','ArrowRight'].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}
+ if(['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}});
+document.getElementById('go').onclick=function(){go(4)};
+var pend=null;d2.addEventListener('load',function(){if(pend){d2.contentWindow.postMessage({mode:pend},'*');pend=null}});
+d1.addEventListener('load',function(){try{d1.contentWindow.postMessage({mode:'employee'},'*')}catch(e){}});
+function setSeg(m){[].forEach.call(document.querySelectorAll('[data-m]'),function(x){x.setAttribute('aria-pressed',x.dataset.m===m)})}
+function open(m){m=m||'employee';setSeg(m);pend=m;if(!d2.getAttribute('src'))d2.src='demo.html';else{try{d2.contentWindow.location.reload()}catch(e){}}ov.classList.add('on')}
+function close(){ov.classList.remove('on');try{d2.contentWindow.postMessage({mode:'employee'},'*')}catch(e){}setTimeout(function(){try{d1.contentWindow.location.reload()}catch(e){}},150)}
+[].forEach.call(document.querySelectorAll('[data-open]'),function(b){b.onclick=function(){open(b.dataset.open)}});ovx.onclick=close;
+[].forEach.call(document.querySelectorAll('[data-m]'),function(b){b.onclick=function(){setSeg(b.dataset.m);try{d2.contentWindow.postMessage({mode:b.dataset.m},'*')}catch(e){}}});
+[].forEach.call(document.querySelectorAll('[data-ph]'),function(b){b.onclick=function(){
+ [].forEach.call(document.querySelectorAll('[data-ph]'),function(x){x.setAttribute('aria-pressed',x===b)});
+ try{d1.contentWindow.postMessage({phase:b.dataset.ph},'*')}catch(e){}}});
+})();
+</script>
+</body>
+</html>
